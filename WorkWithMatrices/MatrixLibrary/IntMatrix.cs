@@ -32,20 +32,20 @@ namespace MatrixLibrary
             return _matrix[rowNumber, columnNumber];
         }
 
-        public void FillWithRandomElements(IntMatrix matrix, int lowerBound, int upperBound)
+        public void FillWithRandomElements(int lowerBound, int upperBound)
         {
             Random r = new Random();
             for (int i = 0; i < _rows; i++)
             {
                 for (int j = 0; j < _columns; j++)
                 {
-                    matrix.SetElement(i, j, r.Next(lowerBound, upperBound));
-                   // _matrix[i, j] = r.Next(lowerBound, upperBound);
+                    
+                    _matrix[i, j] = r.Next(lowerBound, upperBound);
                 }
             }
         }
 
-        public void PrintMatrix(IntMatrix matrix)
+        public void PrintMatrix()
         {
             for (int i = 0; i < _rows; i++)
             {
