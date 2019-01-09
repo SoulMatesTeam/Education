@@ -11,22 +11,24 @@ namespace WorkWithMatrices
         static void Main(string[] args)
         {
             IntMatrix matrix = new IntMatrix(5,5);
-            FillWithRandomElements(matrix);
+            matrix.FillWithRandomElements(matrix, 10, 51);
+            matrix.PrintMatrix(matrix);
+         //   FillWithRandomElements(matrix);
 
 
             Console.ReadLine();
         }
 
-        static void FillWithRandomElements(IntMatrix matrix)
-        {
-            Random r = new Random();
-            for (int i = 0; i < matrix.Rows; i++)
-            {
-                for (int j = 0; j < matrix.Columns; j++)
-                {
-                    matrix.SetElement(i, j, r.Next(0, 11));
-                }
-            }
-        }
+        //static void FillWithRandomElements(IntMatrix matrix)
+        //{
+        //    Random r = new Random();
+        //    for (int i = 0; i < matrix.Rows; i++)
+        //    {
+        //        for (int j = 0; j < matrix.Columns; j++)
+        //        {
+        //            matrix.SetElement(i, j, r.Next(0, 11));
+        //        }
+        //    }
+        //}
     }
 }
