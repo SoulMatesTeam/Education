@@ -1,0 +1,12 @@
+D:\project\MagicClassPractice\MagicLibrary\bin\Debug\MagicLibrary.dll
+D:\project\MagicClassPractice\MagicLibrary\bin\Debug\MagicLibrary.pdb
+D:\project\MagicClassPractice\MagicLibrary\obj\Debug\MagicLibrary.csprojAssemblyReference.cache
+D:\project\MagicClassPractice\MagicLibrary\obj\Debug\MagicLibrary.csproj.CoreCompileInputs.cache
+D:\project\MagicClassPractice\MagicLibrary\obj\Debug\MagicLibrary.dll
+D:\project\MagicClassPractice\MagicLibrary\obj\Debug\MagicLibrary.pdb
+D:\OOP_attempts\MatrixSorterWithClass\MagicClassPractice\MagicLibrary\bin\Debug\MagicLibrary.dll
+D:\OOP_attempts\MatrixSorterWithClass\MagicClassPractice\MagicLibrary\bin\Debug\MagicLibrary.pdb
+D:\OOP_attempts\MatrixSorterWithClass\MagicClassPractice\MagicLibrary\obj\Debug\MagicLibrary.csprojAssemblyReference.cache
+D:\OOP_attempts\MatrixSorterWithClass\MagicClassPractice\MagicLibrary\obj\Debug\MagicLibrary.csproj.CoreCompileInputs.cache
+D:\OOP_attempts\MatrixSorterWithClass\MagicClassPractice\MagicLibrary\obj\Debug\MagicLibrary.dll
+D:\OOP_attempts\MatrixSorterWithClass\MagicClassPractice\MagicLibrary\obj\Debug\MagicLibrary.pdb
