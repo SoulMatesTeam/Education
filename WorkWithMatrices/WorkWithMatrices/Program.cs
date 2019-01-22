@@ -32,19 +32,21 @@ namespace WorkWithMatrices
             IntMatrix matrix5 = matrix1 * matrix2;
             matrix5.PrintMatrix();
 
-            //correct if determinant = 1;
+            correct if determinant = 1;
             Console.WriteLine("Matrix1 / Matrix2");
             IntMatrix matrix6 = matrix1 / matrix2;
             matrix6.PrintMatrix();
 
-            Console.WriteLine("If Matrix1==Matrix2");
+            Console.WriteLine("Matrix1==Matrix2");
             bool matricesAreEqual = matrix1 == matrix2;
+            Console.WriteLine(matricesAreEqual);
 
-            Console.WriteLine("If Matrix1!=Matrix2");
+            Console.WriteLine("Matrix1!=Matrix2");
             bool matricesAreNotEqual = matrix1 != matrix2;
+            Console.WriteLine(matricesAreNotEqual);
 
             Console.WriteLine("Matrix1 * 2");
-            IntMatrix matrix7 = matrix1*2;
+            IntMatrix matrix7 = matrix1 * 2;
             matrix7.PrintMatrix();
 
             Console.WriteLine("Matrix2 / 2");
