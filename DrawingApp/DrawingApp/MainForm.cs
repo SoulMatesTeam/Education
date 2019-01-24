@@ -11,62 +11,114 @@ namespace DrawingApp
 {
     public partial class MainForm : Form
     {
-        Color textColor;
+        Graphics canvas;
+        List<Point> points;
+        Point mousePreviousPosition;
+        DrawingMode drawingMode;
+        bool isDrawing;
+        float penSize;
+        Color penColor;
 
         public MainForm()
         {
             InitializeComponent();
-            textColor = Color.Black;
+            canvas = pbCanvas.CreateGraphics();
+            points = new List<Point>();
+            mousePreviousPosition = new Point();
+            drawingMode = DrawingMode.FreeDrawing;
+            isDrawing = false;
+            penSize = 1f;
+            penColor = Color.Black;
+            cbColor.SelectedIndex = 0;
         }
 
-        private void btnOk_Click(object sender, EventArgs e)
+        private void PnlCanvas_MouseMove(object sender, MouseEventArgs e)
         {
-            lblText.Text = tbText.Text;
-            lblText.ForeColor = textColor;
-            var fontSize = float.Parse(cbxFontSize.Text);
-            lblText.Font = new Font("Microsoft Sans Serif", fontSize, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            switch (drawingMode)
+            {
+                case DrawingMode.FreeDrawing:
+                    FreeDrawing(e);
+                    break;
+                case DrawingMode.DrawByDots:
+                    break;
+                default:
+                    break;
+            }
 
+            mousePreviousPosition = e.Location;
         }
 
-        private void rbtRed_CheckedChanged(object sender, EventArgs e)
+        private void FreeDrawing(MouseEventArgs e)
         {
-            if (rbtRed.Checked)
-                textColor = Color.Red;
+            if (isDrawing)
+            {
+                canvas.DrawLine(new Pen(penColor, penSize), mousePreviousPosition, e.Location); 
+            }
         }
 
-        private void rbtGreen_CheckedChanged(object sender, EventArgs e)
+        private void PnlCanvas_MouseDown(object sender, MouseEventArgs e)
         {
-            if (rbtGreen.Checked)
-                textColor = Color.Green;
+            isDrawing = true;
         }
 
-        private void rbtYellow_CheckedChanged(object sender, EventArgs e)
+        private void PnlCanvas_MouseUp(object sender, MouseEventArgs e)
         {
-            if (rbtYellow.Checked)
-                textColor = Color.Yellow;
+            isDrawing = false;
         }
 
-        private void rbtBlue_CheckedChanged(object sender, EventArgs e)
+        private void BtPen_Click(object sender, EventArgs e)
         {
-            if (rbtBlue.Checked)
-                textColor = Color.Blue;
+            drawingMode = DrawingMode.FreeDrawing;
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
+        private void pbCanvas_MouseClick(object sender, MouseEventArgs e)
         {
-            Application.Exit();
+            switch (drawingMode)
+            {
+                case DrawingMode.FreeDrawing:
+                    break;
+                case DrawingMode.DrawByDots:
+                    DrawByDots(e);
+                    break;
+                default:
+                    break;
+            }
         }
 
-        private void btnShowSecondForm_Click(object sender, EventArgs e)
+        private void DrawByDots(MouseEventArgs e)
         {
-            SecondForm secondForm = new SecondForm();
-            var result = secondForm.ShowDialog();
-            lblText.Font = new Font("Microsoft Sans Serif", secondForm.SelectedFontSize, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            if (e.Button == MouseButtons.Left)
+            {
+                points.Add(e.Location);
+                canvas.FillEllipse(Brushes.Black, new RectangleF(new PointF(e.X - 2.5f, e.Y - 2.5f), new Size(5, 5)));
+            }
 
-            if (result == DialogResult.OK)
-                lblText.Text = "Dialog was OK!";
-            else if (result == DialogResult.Cancel)
-                lblText.Text = "Dialog was not so good!";
+            if (e.Button == MouseButtons.Right)
+            {
+                canvas.DrawLines(new Pen(penColor, penSize), points.ToArray());
+                points.Clear();
+            }
+        }
+
+        private void btErase_Click(object sender, EventArgs e)
+        {
+            canvas.Clear(Color.White);
+        }
+
+        private void btDrawByDots_Click(object sender, EventArgs e)
+        {
+            drawingMode = DrawingMode.DrawByDots;
+        }
+
+        private void tbPenSize_ValueChanged(object sender, EventArgs e)
+        {
+            penSize = (float)tbPenSize.Value;
+            lbPenSize.Text = tbPenSize.Value.ToString();
+        }
+
+        private void cbColor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            penColor = Color.FromName(cbColor.Text);
         }
     }
 }

@@ -28,204 +28,166 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnOk = new System.Windows.Forms.Button();
-            this.tbText = new System.Windows.Forms.TextBox();
-            this.rbtRed = new System.Windows.Forms.RadioButton();
-            this.rbtGreen = new System.Windows.Forms.RadioButton();
-            this.cbxFontSize = new System.Windows.Forms.ComboBox();
+            this.cbColor = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.gbxColor = new System.Windows.Forms.GroupBox();
-            this.rbtBlue = new System.Windows.Forms.RadioButton();
-            this.rbtYellow = new System.Windows.Forms.RadioButton();
-            this.lblText = new System.Windows.Forms.Label();
-            this.btnExit = new System.Windows.Forms.Button();
-            this.btnShowSecondForm = new System.Windows.Forms.Button();
-            this.gbxColor.SuspendLayout();
+            this.gbTools = new System.Windows.Forms.GroupBox();
+            this.btErase = new System.Windows.Forms.Button();
+            this.btDrawByDots = new System.Windows.Forms.Button();
+            this.btPen = new System.Windows.Forms.Button();
+            this.pbCanvas = new System.Windows.Forms.PictureBox();
+            this.tbPenSize = new System.Windows.Forms.TrackBar();
+            this.lbPenSize = new System.Windows.Forms.Label();
+            this.gbTools.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbCanvas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbPenSize)).BeginInit();
             this.SuspendLayout();
             // 
-            // btnOk
+            // cbColor
             // 
-            this.btnOk.BackColor = System.Drawing.SystemColors.Control;
-            this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnOk.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnOk.Location = new System.Drawing.Point(292, 24);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(78, 27);
-            this.btnOk.TabIndex = 0;
-            this.btnOk.Text = "Apply";
-            this.btnOk.UseVisualStyleBackColor = false;
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
-            // 
-            // tbText
-            // 
-            this.tbText.Location = new System.Drawing.Point(27, 29);
-            this.tbText.Name = "tbText";
-            this.tbText.Size = new System.Drawing.Size(246, 22);
-            this.tbText.TabIndex = 1;
-            // 
-            // rbtRed
-            // 
-            this.rbtRed.AutoSize = true;
-            this.rbtRed.Location = new System.Drawing.Point(6, 21);
-            this.rbtRed.Name = "rbtRed";
-            this.rbtRed.Size = new System.Drawing.Size(55, 21);
-            this.rbtRed.TabIndex = 2;
-            this.rbtRed.TabStop = true;
-            this.rbtRed.Text = "Red";
-            this.rbtRed.UseVisualStyleBackColor = true;
-            this.rbtRed.CheckedChanged += new System.EventHandler(this.rbtRed_CheckedChanged);
-            // 
-            // rbtGreen
-            // 
-            this.rbtGreen.AutoSize = true;
-            this.rbtGreen.Location = new System.Drawing.Point(6, 48);
-            this.rbtGreen.Name = "rbtGreen";
-            this.rbtGreen.Size = new System.Drawing.Size(69, 21);
-            this.rbtGreen.TabIndex = 3;
-            this.rbtGreen.TabStop = true;
-            this.rbtGreen.Text = "Green";
-            this.rbtGreen.UseVisualStyleBackColor = true;
-            this.rbtGreen.CheckedChanged += new System.EventHandler(this.rbtGreen_CheckedChanged);
-            // 
-            // cbxFontSize
-            // 
-            this.cbxFontSize.FormattingEnabled = true;
-            this.cbxFontSize.Items.AddRange(new object[] {
-            "14",
-            "18",
-            "24",
-            "48"});
-            this.cbxFontSize.Location = new System.Drawing.Point(185, 78);
-            this.cbxFontSize.Name = "cbxFontSize";
-            this.cbxFontSize.Size = new System.Drawing.Size(88, 24);
-            this.cbxFontSize.TabIndex = 4;
+            this.cbColor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbColor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbColor.FormattingEnabled = true;
+            this.cbColor.Items.AddRange(new object[] {
+            "Black",
+            "Green",
+            "Blue",
+            "Pink",
+            "Yellow",
+            "Red"});
+            this.cbColor.Location = new System.Drawing.Point(921, 91);
+            this.cbColor.Name = "cbColor";
+            this.cbColor.Size = new System.Drawing.Size(209, 24);
+            this.cbColor.TabIndex = 1;
+            this.cbColor.SelectedIndexChanged += new System.EventHandler(this.cbColor_SelectedIndexChanged);
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(182, 57);
+            this.label1.Location = new System.Drawing.Point(870, 94);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 17);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Font size";
+            this.label1.Size = new System.Drawing.Size(45, 17);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Color:";
             // 
-            // label2
+            // gbTools
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 17);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Enter text:";
+            this.gbTools.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbTools.Controls.Add(this.btErase);
+            this.gbTools.Controls.Add(this.btDrawByDots);
+            this.gbTools.Controls.Add(this.btPen);
+            this.gbTools.Location = new System.Drawing.Point(863, 4);
+            this.gbTools.Name = "gbTools";
+            this.gbTools.Size = new System.Drawing.Size(267, 81);
+            this.gbTools.TabIndex = 3;
+            this.gbTools.TabStop = false;
+            this.gbTools.Text = "Tools";
             // 
-            // gbxColor
+            // btErase
             // 
-            this.gbxColor.Controls.Add(this.rbtRed);
-            this.gbxColor.Controls.Add(this.rbtBlue);
-            this.gbxColor.Controls.Add(this.rbtYellow);
-            this.gbxColor.Controls.Add(this.rbtGreen);
-            this.gbxColor.Location = new System.Drawing.Point(27, 57);
-            this.gbxColor.Name = "gbxColor";
-            this.gbxColor.Size = new System.Drawing.Size(133, 133);
-            this.gbxColor.TabIndex = 6;
-            this.gbxColor.TabStop = false;
-            this.gbxColor.Text = "Color";
+            this.btErase.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btErase.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btErase.Image = global::DrawingApp.Properties.Resources.eraser;
+            this.btErase.Location = new System.Drawing.Point(118, 21);
+            this.btErase.Name = "btErase";
+            this.btErase.Size = new System.Drawing.Size(50, 50);
+            this.btErase.TabIndex = 1;
+            this.btErase.UseVisualStyleBackColor = true;
+            this.btErase.Click += new System.EventHandler(this.btErase_Click);
             // 
-            // rbtBlue
+            // btDrawByDots
             // 
-            this.rbtBlue.AutoSize = true;
-            this.rbtBlue.Location = new System.Drawing.Point(7, 102);
-            this.rbtBlue.Name = "rbtBlue";
-            this.rbtBlue.Size = new System.Drawing.Size(57, 21);
-            this.rbtBlue.TabIndex = 3;
-            this.rbtBlue.TabStop = true;
-            this.rbtBlue.Text = "Blue";
-            this.rbtBlue.UseVisualStyleBackColor = true;
-            this.rbtBlue.CheckedChanged += new System.EventHandler(this.rbtBlue_CheckedChanged);
+            this.btDrawByDots.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btDrawByDots.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btDrawByDots.Image = global::DrawingApp.Properties.Resources.triangle;
+            this.btDrawByDots.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btDrawByDots.Location = new System.Drawing.Point(62, 21);
+            this.btDrawByDots.Name = "btDrawByDots";
+            this.btDrawByDots.Size = new System.Drawing.Size(50, 50);
+            this.btDrawByDots.TabIndex = 1;
+            this.btDrawByDots.UseVisualStyleBackColor = true;
+            this.btDrawByDots.Click += new System.EventHandler(this.btDrawByDots_Click);
             // 
-            // rbtYellow
+            // btPen
             // 
-            this.rbtYellow.AutoSize = true;
-            this.rbtYellow.Location = new System.Drawing.Point(7, 75);
-            this.rbtYellow.Name = "rbtYellow";
-            this.rbtYellow.Size = new System.Drawing.Size(69, 21);
-            this.rbtYellow.TabIndex = 3;
-            this.rbtYellow.TabStop = true;
-            this.rbtYellow.Text = "Yellow";
-            this.rbtYellow.UseVisualStyleBackColor = true;
-            this.rbtYellow.CheckedChanged += new System.EventHandler(this.rbtYellow_CheckedChanged);
+            this.btPen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btPen.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btPen.Image = global::DrawingApp.Properties.Resources.pen;
+            this.btPen.Location = new System.Drawing.Point(6, 21);
+            this.btPen.Name = "btPen";
+            this.btPen.Size = new System.Drawing.Size(50, 50);
+            this.btPen.TabIndex = 0;
+            this.btPen.UseVisualStyleBackColor = true;
+            this.btPen.Click += new System.EventHandler(this.BtPen_Click);
             // 
-            // lblText
+            // pbCanvas
             // 
-            this.lblText.AutoSize = true;
-            this.lblText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblText.Location = new System.Drawing.Point(182, 173);
-            this.lblText.Name = "lblText";
-            this.lblText.Size = new System.Drawing.Size(0, 17);
-            this.lblText.TabIndex = 7;
+            this.pbCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pbCanvas.Location = new System.Drawing.Point(12, 8);
+            this.pbCanvas.Name = "pbCanvas";
+            this.pbCanvas.Size = new System.Drawing.Size(845, 595);
+            this.pbCanvas.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbCanvas.TabIndex = 4;
+            this.pbCanvas.TabStop = false;
+            this.pbCanvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pbCanvas_MouseClick);
+            this.pbCanvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PnlCanvas_MouseDown);
+            this.pbCanvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PnlCanvas_MouseMove);
+            this.pbCanvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PnlCanvas_MouseUp);
             // 
-            // btnExit
+            // tbPenSize
             // 
-            this.btnExit.BackColor = System.Drawing.SystemColors.Control;
-            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnExit.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnExit.Location = new System.Drawing.Point(27, 224);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(78, 27);
-            this.btnExit.TabIndex = 0;
-            this.btnExit.Text = "Exit";
-            this.btnExit.UseVisualStyleBackColor = false;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            this.tbPenSize.LargeChange = 1;
+            this.tbPenSize.Location = new System.Drawing.Point(873, 144);
+            this.tbPenSize.Maximum = 15;
+            this.tbPenSize.Minimum = 1;
+            this.tbPenSize.Name = "tbPenSize";
+            this.tbPenSize.Size = new System.Drawing.Size(257, 56);
+            this.tbPenSize.TabIndex = 5;
+            this.tbPenSize.Value = 1;
+            this.tbPenSize.ValueChanged += new System.EventHandler(this.tbPenSize_ValueChanged);
             // 
-            // btnShowSecondForm
+            // lbPenSize
             // 
-            this.btnShowSecondForm.Location = new System.Drawing.Point(292, 57);
-            this.btnShowSecondForm.Name = "btnShowSecondForm";
-            this.btnShowSecondForm.Size = new System.Drawing.Size(68, 42);
-            this.btnShowSecondForm.TabIndex = 8;
-            this.btnShowSecondForm.Text = "SecondForm";
-            this.btnShowSecondForm.UseVisualStyleBackColor = true;
-            this.btnShowSecondForm.Click += new System.EventHandler(this.btnShowSecondForm_Click);
+            this.lbPenSize.AutoSize = true;
+            this.lbPenSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbPenSize.Location = new System.Drawing.Point(988, 183);
+            this.lbPenSize.Name = "lbPenSize";
+            this.lbPenSize.Size = new System.Drawing.Size(17, 18);
+            this.lbPenSize.TabIndex = 6;
+            this.lbPenSize.Text = "1";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(402, 263);
-            this.Controls.Add(this.btnShowSecondForm);
-            this.Controls.Add(this.lblText);
-            this.Controls.Add(this.gbxColor);
-            this.Controls.Add(this.label2);
+            this.ClientSize = new System.Drawing.Size(1142, 615);
+            this.Controls.Add(this.lbPenSize);
+            this.Controls.Add(this.tbPenSize);
+            this.Controls.Add(this.pbCanvas);
+            this.Controls.Add(this.gbTools);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.cbxFontSize);
-            this.Controls.Add(this.tbText);
-            this.Controls.Add(this.btnExit);
-            this.Controls.Add(this.btnOk);
+            this.Controls.Add(this.cbColor);
             this.Name = "MainForm";
             this.Text = "MainForm";
-            this.gbxColor.ResumeLayout(false);
-            this.gbxColor.PerformLayout();
+            this.gbTools.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbCanvas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbPenSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.TextBox tbText;
-        private System.Windows.Forms.RadioButton rbtRed;
-        private System.Windows.Forms.RadioButton rbtGreen;
-        private System.Windows.Forms.ComboBox cbxFontSize;
+        private System.Windows.Forms.ComboBox cbColor;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox gbxColor;
-        private System.Windows.Forms.RadioButton rbtBlue;
-        private System.Windows.Forms.RadioButton rbtYellow;
-        private System.Windows.Forms.Label lblText;
-        private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.Button btnShowSecondForm;
+        private System.Windows.Forms.GroupBox gbTools;
+        private System.Windows.Forms.Button btPen;
+        private System.Windows.Forms.Button btDrawByDots;
+        private System.Windows.Forms.PictureBox pbCanvas;
+        private System.Windows.Forms.Button btErase;
+        private System.Windows.Forms.TrackBar tbPenSize;
+        private System.Windows.Forms.Label lbPenSize;
     }
 }
-
