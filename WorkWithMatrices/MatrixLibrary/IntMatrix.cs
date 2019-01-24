@@ -14,6 +14,7 @@ namespace MatrixLibrary
 
         public int Rows => _rows;
         public int Columns => _columns;
+        Random r = new Random();
 
         public IntMatrix(int rows, int columns)
         {
@@ -34,15 +35,44 @@ namespace MatrixLibrary
 
         public void FillWithRandomElements(int lowerBound, int upperBound)
         {
-            Random r = new Random();
             for (int i = 0; i < _rows; i++)
             {
                 for (int j = 0; j < _columns; j++)
                 {
-
                     _matrix[i, j] = r.Next(lowerBound, upperBound);
                 }
             }
+        }
+
+        private void Iinit(int[,] matrix)
+        {
+            _rows = 0;
+            _columns = 0;
+            try
+            {
+                for (int i = 0; i < int.MaxValue; i++)
+                {
+                    var temp = matrix[i, 0];
+                    _rows++;
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
+
+            try
+            {
+                for (int i = 0; i < int.MaxValue; i++)
+                {
+                    var temp = matrix[0, i];
+                    _columns++;
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+            }
+
+            _matrix = matrix;
         }
 
         public void PrintMatrix()
@@ -164,36 +194,6 @@ namespace MatrixLibrary
 
         public static bool operator ==(IntMatrix left, IntMatrix right)
         {
-            bool matricesAreEqual = false;
-            if (left.Columns != right.Columns || left.Rows != right.Rows)
-                throw new InvalidOperationException("Row and Column number should be equal.");
-
-            for (int i = 0; i < left.Rows; i++)
-            {
-                for (int j = 0; j < left.Columns; j++)
-                {
-                    if (left.GetElement(i, j) == right.GetElement(i, j)){
-
-                        matricesAreEqual = true;
-                    }
-                }
-            }
-
-            if (matricesAreEqual)
-            {
-                Console.WriteLine($"{matricesAreEqual} Matrices are eaqual");
-            }
-            else
-            {
-                Console.WriteLine($"{matricesAreEqual} Matrices are not eaqual");
-            }
-
-            return matricesAreEqual;
-        }
-
-        public static bool operator !=(IntMatrix left, IntMatrix right)
-        {
-            bool matricesAreNotEqual = false;
             if (left.Columns != right.Columns || left.Rows != right.Rows)
                 throw new InvalidOperationException("Row and Column number should be equal.");
 
@@ -203,32 +203,29 @@ namespace MatrixLibrary
                 {
                     if (left.GetElement(i, j) != right.GetElement(i, j)){
 
-                        matricesAreNotEqual = true;
-                        break;
+                        return false;
                     }
                 }
             }
-
-            if (matricesAreNotEqual)
-            {
-                Console.WriteLine($"{matricesAreNotEqual} Matrices are not eaqual");
-            }
-            else
-            {
-                Console.WriteLine($"{matricesAreNotEqual} Matrices are equal");
-            }
-
-            return matricesAreNotEqual;
+            return true;
         }
 
-        public static IntMatrix operator +(IntMatrix matrix, int number)
+        public static bool operator !=(IntMatrix left, IntMatrix right)
         {
-            throw new InvalidOperationException("The mission is impossible. You can not add number to matrix.");
-        }
+            if (left.Columns != right.Columns || left.Rows != right.Rows)
+                throw new InvalidOperationException("Row and Column number should be equal.");
 
-        public static IntMatrix operator -(IntMatrix matrix, int number)
-        {
-            throw new InvalidOperationException("The mission is impossible. You can not deduct number from matrix.");
+            for (int i = 0; i < left.Rows; i++)
+            {
+                for (int j = 0; j < left.Columns; j++)
+                {
+                    if (left.GetElement(i, j) != right.GetElement(i, j)){
+
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         public static IntMatrix operator *(IntMatrix matrix, int number)
@@ -262,34 +259,26 @@ namespace MatrixLibrary
             return result;
         }
 
-        //smth wrong here, first numbre returns wrong
         public static int[] operator *(IntMatrix matrix, int[] array)
         {
-            int[] result = new int[matrix.Columns];
-            if(matrix.Columns != array.Length)
+            int[] result = new int[matrix.Rows];
+            if (matrix.Columns != array.Length)
                 throw new InvalidOperationException("Matrix columns number and array length should equal");
-         
+
             for (int i = 0; i < matrix.Rows; i++)
             {
-                
-                for (int j = 0; j < array.Length; j++)
+                int cellValue = 0;
+
+                for (int j = 0; j < matrix.Columns ; j++)
                 {
-                    int cellValue = 0;
-                    for (int k = 0; k < matrix.Columns; k++)
-                    {
-
-                        cellValue += matrix.GetElement(i, k) * array[k];
-                        result.SetValue(cellValue, j);
-
-                    }
+                     cellValue += matrix.GetElement(i, j) * array[j];
+                     
                 }
+                result.SetValue(cellValue, i);
             }
 
             return result;
         }
-
-
-
 
 
 
