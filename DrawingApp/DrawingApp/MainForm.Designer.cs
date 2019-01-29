@@ -37,6 +37,7 @@
             this.pbCanvas = new System.Windows.Forms.PictureBox();
             this.tbPenSize = new System.Windows.Forms.TrackBar();
             this.lbPenSize = new System.Windows.Forms.Label();
+            this.btSave = new System.Windows.Forms.Button();
             this.gbTools.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbCanvas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbPenSize)).BeginInit();
@@ -158,11 +159,22 @@
             this.lbPenSize.TabIndex = 6;
             this.lbPenSize.Text = "1";
             // 
+            // btSave
+            // 
+            this.btSave.Location = new System.Drawing.Point(873, 580);
+            this.btSave.Name = "btSave";
+            this.btSave.Size = new System.Drawing.Size(75, 23);
+            this.btSave.TabIndex = 7;
+            this.btSave.Text = "Save";
+            this.btSave.UseVisualStyleBackColor = true;
+            this.btSave.Click += new System.EventHandler(this.save_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1142, 615);
+            this.Controls.Add(this.btSave);
             this.Controls.Add(this.lbPenSize);
             this.Controls.Add(this.tbPenSize);
             this.Controls.Add(this.pbCanvas);
@@ -189,5 +201,6 @@
         private System.Windows.Forms.Button btErase;
         private System.Windows.Forms.TrackBar tbPenSize;
         private System.Windows.Forms.Label lbPenSize;
+        private System.Windows.Forms.Button btSave;
     }
 }
