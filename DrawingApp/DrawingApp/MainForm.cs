@@ -20,6 +20,10 @@ namespace DrawingApp
         bool isDrawing;
         float penSize;
         Color penColor;
+        Color backGroundColor;
+       
+      
+        
 
         public MainForm()
         {
@@ -34,8 +38,12 @@ namespace DrawingApp
             isDrawing = false;
             penSize = 1f;
             penColor = Color.Black;
-            cbColor.SelectedIndex = 0;
+            backGroundColor = Color.White;
             
+            cbColor.SelectedIndex = 0;
+            cbBgColor.SelectedIndex = 0;
+           
+       
         }
 
         private void PnlCanvas_MouseMove(object sender, MouseEventArgs e)
@@ -58,8 +66,10 @@ namespace DrawingApp
         {
             if (isDrawing)
             {
+             
                 controlCanvas.DrawLine(new Pen(penColor, penSize), mousePreviousPosition, e.Location);
                 points.Add(e.Location);
+
             }
         }
 
@@ -70,11 +80,37 @@ namespace DrawingApp
 
         private void PnlCanvas_MouseUp(object sender, MouseEventArgs e)
         {
+            
             isDrawing = false;
-            bitmapCanvas.DrawLines(new Pen(new SolidBrush(penColor)), points.ToArray());
-            points.Clear();
+            
+            if (drawingMode == DrawingMode.FreeDrawing)
+            {
+                
+                bitmapCanvas.DrawLines(new Pen(new SolidBrush(penColor), penSize), points.ToArray());
+                
+                points.Clear();
+            }
+            if(drawingMode == DrawingMode.DrawByDots)
+            {
+                
+                if (e.Button == MouseButtons.Left)
+                {
+                    points.Add(e.Location);
+                    bitmapCanvas.FillEllipse(Brushes.Black, new RectangleF(new PointF(e.X - 2.5f, e.Y - 2.5f), new Size(5, 5)));
+                }
+
+                if (e.Button == MouseButtons.Right)
+                {
+                    bitmapCanvas.DrawLines(new Pen(new SolidBrush(penColor), penSize), points.ToArray());
+                    points.Clear();
+
+                }
+            }
+
+            
             controlCanvas.Clear(Color.White);
             pbCanvas.Image = bitmap;
+                
         }
 
         private void BtPen_Click(object sender, EventArgs e)
@@ -132,15 +168,45 @@ namespace DrawingApp
             penColor = Color.FromName(cbColor.Text);
         }
 
-        private void save_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Images (*.png)|*.png";
-
-            if(saveFileDialog.ShowDialog() == DialogResult.OK)
+            
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "Images (*.png)|*.png| Images(*.jpg)|*.jpg";
+            saveFileDialog1.Title = "Save an Image File";
+           
+            
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                bitmap.Save(saveFileDialog.FileName);
+                bitmap.Save(saveFileDialog1.FileName);
+           
+
+                MessageBox.Show("Файл сохранен");
             }
+        }
+
+        private void btnOpen_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "Image files(*.jpg)|*.jpg|All files(*.*)|*.*";
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+               
+                bitmap = new Bitmap(Image.FromFile(openFileDialog1.FileName), pbCanvas.Width, pbCanvas.Height);
+                bitmapCanvas = Graphics.FromImage(bitmap);
+                pbCanvas.Image = bitmap;
+            }
+        }
+
+        private void cbBgColor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            backGroundColor = Color.FromName(cbBgColor.Text);
+            pbCanvas.BackColor = backGroundColor;
+            bitmapCanvas.Clear(backGroundColor);
+
+
+
         }
     }
 }
