@@ -14,6 +14,7 @@ namespace DrawingApp
         Bitmap bitmap;
         Graphics bitmapCanvas;
         Graphics controlCanvas;
+        List<Shape> _shapes;
         List<Point> points;
         Point mousePreviousPosition;
         DrawingMode drawingMode;
@@ -21,9 +22,7 @@ namespace DrawingApp
         float penSize;
         Color penColor;
         Color backGroundColor;
-       
-      
-        
+
 
         public MainForm()
         {
@@ -33,17 +32,19 @@ namespace DrawingApp
             bitmapCanvas = Graphics.FromImage(bitmap);
 
             points = new List<Point>();
+            _shapes = new List<Shape>();
+
             mousePreviousPosition = new Point();
             drawingMode = DrawingMode.FreeDrawing;
             isDrawing = false;
             penSize = 1f;
             penColor = Color.Black;
             backGroundColor = Color.White;
-            
+
             cbColor.SelectedIndex = 0;
             cbBgColor.SelectedIndex = 0;
-           
-       
+
+
         }
 
         private void PnlCanvas_MouseMove(object sender, MouseEventArgs e)
@@ -66,10 +67,8 @@ namespace DrawingApp
         {
             if (isDrawing)
             {
-             
                 controlCanvas.DrawLine(new Pen(penColor, penSize), mousePreviousPosition, e.Location);
                 points.Add(e.Location);
-
             }
         }
 
@@ -80,37 +79,33 @@ namespace DrawingApp
 
         private void PnlCanvas_MouseUp(object sender, MouseEventArgs e)
         {
-            
             isDrawing = false;
-            
-            if (drawingMode == DrawingMode.FreeDrawing)
+
+            if(drawingMode == DrawingMode.FreeDrawing)
             {
-                
-                bitmapCanvas.DrawLines(new Pen(new SolidBrush(penColor), penSize), points.ToArray());
-                
+                if (points.Count < 2)
+                {
+                    points.Clear();
+                    return;
+                }
+
+                _shapes.Add(new Shape(points.ToArray()));
                 points.Clear();
             }
-            if(drawingMode == DrawingMode.DrawByDots)
+
+            DrawShapes();
+        }
+
+        private void DrawShapes()
+        {
+            bitmapCanvas.Clear(backGroundColor);
+            foreach (var shape in _shapes)
             {
-                
-                if (e.Button == MouseButtons.Left)
-                {
-                    points.Add(e.Location);
-                    bitmapCanvas.FillEllipse(Brushes.Black, new RectangleF(new PointF(e.X - 2.5f, e.Y - 2.5f), new Size(5, 5)));
-                }
-
-                if (e.Button == MouseButtons.Right)
-                {
-                    bitmapCanvas.DrawLines(new Pen(new SolidBrush(penColor), penSize), points.ToArray());
-                    points.Clear();
-
-                }
+                shape.Draw(new Pen(new SolidBrush(penColor), penSize), bitmapCanvas);
             }
 
-            
-            controlCanvas.Clear(Color.White);
+            controlCanvas.Clear(backGroundColor);
             pbCanvas.Image = bitmap;
-                
         }
 
         private void BtPen_Click(object sender, EventArgs e)
@@ -142,14 +137,18 @@ namespace DrawingApp
 
             if (e.Button == MouseButtons.Right)
             {
-                controlCanvas.DrawLines(new Pen(penColor, penSize), points.ToArray());
+                _shapes.Add(new Shape(points.ToArray()));
                 points.Clear();
+                DrawShapes();
             }
         }
 
         private void btErase_Click(object sender, EventArgs e)
         {
             controlCanvas.Clear(Color.White);
+            bitmapCanvas.Clear(Color.White);
+            backGroundColor = Color.White;
+            _shapes.Clear();
         }
 
         private void btDrawByDots_Click(object sender, EventArgs e)
@@ -170,16 +169,15 @@ namespace DrawingApp
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            
+
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Filter = "Images (*.png)|*.png| Images(*.jpg)|*.jpg";
             saveFileDialog1.Title = "Save an Image File";
-           
-            
+
+
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 bitmap.Save(saveFileDialog1.FileName);
-           
 
                 MessageBox.Show("Файл сохранен");
             }
@@ -192,7 +190,6 @@ namespace DrawingApp
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-               
                 bitmap = new Bitmap(Image.FromFile(openFileDialog1.FileName), pbCanvas.Width, pbCanvas.Height);
                 bitmapCanvas = Graphics.FromImage(bitmap);
                 pbCanvas.Image = bitmap;
@@ -202,11 +199,7 @@ namespace DrawingApp
         private void cbBgColor_SelectedIndexChanged(object sender, EventArgs e)
         {
             backGroundColor = Color.FromName(cbBgColor.Text);
-            pbCanvas.BackColor = backGroundColor;
-            bitmapCanvas.Clear(backGroundColor);
-
-
-
+            DrawShapes();
         }
     }
 }
